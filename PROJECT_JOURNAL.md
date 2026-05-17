@@ -1,5 +1,4 @@
 # PROJECT_JOURNAL.md - Chronological Development Notes
-
 **Project:** Policy Rule Interpreter for Educational Analytics  
 **Student:** Binju Karki  
 **Course:** Generative AI (Master's in Data Science & Analytics)  

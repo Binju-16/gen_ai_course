@@ -5,7 +5,6 @@
 **Creator:** Binju Karki, GVSU Charter Schools Office Data Analyst GA  
 **Real Problem:** Manually updating dashboard code every time charter school regulations or funding rules change.  
 **GenAI Solution:** Build a prototype that parses policy/rule changes from Word docs or spreadsheets and suggests dashboard code updates.
-
 ---
 
 ## 2. Problem Statement
@@ -13,14 +12,12 @@
 - **Friction:** Different grade levels have different requirements; funding rules are performance-based; rules change frequently
 - **Why it matters:** Dashboard becomes stale, stakeholders get outdated information, time wasted on manual rewrites
 - **GenAI Angle:** Use LLM to extract structured rules from unstructured documents and suggest code/logic changes
-
 ---
 
 ## 3. Target User
 - **Primary:** Binju (and other data analysts at Charter Schools Office)
 - **Use case:** Receives a policy update → Pastes it into the tool → Gets a structured interpretation + suggested dashboard logic
 - **Skill level:** Data analyst comfortable with SQL/Python, not a software engineer
-
 ---
 
 ## 4. MVP Scope for This Week

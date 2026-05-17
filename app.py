@@ -1,5 +1,5 @@
 """
-Policy Rule Interpreter for Educational Analytics - Main Streamlit App
+Policy Rule Interpreter for Educational Analytics - Main Streamlit Application
 
 This is the user-facing web interface. It:
 1. Displays a form where users paste policy text

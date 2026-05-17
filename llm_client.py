@@ -1,6 +1,5 @@
 """
 LLM Client Module - Handles interaction with OpenAI API
-
 This module abstracts away the OpenAI API call logic so app.py can focus on UI.
 It loads the system prompt, sends user input to GPT-4o-mini, and parses the JSON response.
 """

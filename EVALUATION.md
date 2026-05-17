@@ -3,7 +3,6 @@
 **Status:** MVP Evaluation (May 16, 2026)
 
 ## Test Cases
-
 ### Test Case 1: Grade Level Funding Rule
 
 **Input Policy:**

@@ -1,5 +1,4 @@
 # BUILD_LOG.md - Project Development & Prompt Engineering Iterations
-
 **Project:** Policy Rule Interpreter for Educational Analytics  
 **Started:** May 16, 2026  
 **Author:** Binju Karki  
