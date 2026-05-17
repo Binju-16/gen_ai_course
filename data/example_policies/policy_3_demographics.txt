@@ -1,0 +1,23 @@
+POLICY UPDATE: Special Population Performance Tracking
+Effective Date: Start of Next Academic Year
+
+New requirement: All dashboard reports must now separately track proficiency metrics for special populations:
+
+1. English Language Learners (ELL)
+   - Track proficiency rate for ELL students
+   - Must disaggregate by year of ELL status (Year 1, Year 2+)
+
+2. Students with Individualized Education Plans (IEP)
+   - Track proficiency rate for IEP students
+   - Compare to general education proficiency rate
+
+3. Students Receiving Free/Reduced Lunch (FRL)
+   - Track proficiency rate for FRL students
+   - Track FRL percentage of total enrollment
+
+Funding impact: Schools with > 30% ELL population receive 8% additional per-pupil funding to support instruction.
+
+Dashboard changes needed:
+- Add demographic-based proficiency calculations
+- Add demographic-based funding calculations
+- Create new report sections for each subgroup

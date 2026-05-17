@@ -1,0 +1,18 @@
+POLICY UPDATE: Attendance-Based Funding Adjustment
+Effective Date: Immediately
+
+Charter schools will now have funding adjusted based on overall attendance metrics:
+
+Current: Per-pupil funding is flat rate regardless of attendance
+New: Per-pupil funding will be adjusted by attendance rate:
+- If school attendance rate >= 95%: Receive 105% of per-pupil funding
+- If school attendance rate 90-94%: Receive 100% of per-pupil funding (no change)
+- If school attendance rate 85-89%: Receive 95% of per-pupil funding (5% reduction)
+- If school attendance rate < 85%: Receive 90% of per-pupil funding (10% reduction)
+
+The attendance rate is calculated as: (total days attended) / (total days available for all students)
+
+Impact on dashboard:
+- Must add school-level attendance rate calculation
+- Must apply dynamic funding multiplier based on this rate
+- Must show funding impact in reports

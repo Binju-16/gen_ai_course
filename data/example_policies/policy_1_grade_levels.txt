@@ -1,0 +1,18 @@
+POLICY UPDATE: Grade Level Funding Eligibility
+Effective Date: 2024-2025 School Year
+
+Starting in the 2024-2025 school year, funding calculations will change based on student grade level:
+
+1. Elementary students (K-2): Full per-pupil funding allocation
+2. Primary students (3-5): Per-pupil funding + 10% performance bonus if proficiency rate >= 70%
+3. Middle school students (6-8): Per-pupil funding + 15% performance bonus if proficiency rate >= 75%
+4. High school students (9-12): Per-pupil funding + 20% performance bonus if graduation rate >= 85%
+
+This means that the dashboard must now:
+- Calculate proficiency rates separately by grade band
+- Apply different multipliers to funding calculations
+- Track graduation rates for 9-12 grade cohorts specifically
+
+Questions for clarification:
+- Does this apply retroactively to 2023-24 data?
+- How are students counted who move grades mid-year?

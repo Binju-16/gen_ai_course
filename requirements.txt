@@ -1,0 +1,14 @@
+# Core web framework
+streamlit==1.28.0
+
+# LLM and API
+openai==1.3.0
+
+# Utilities
+python-dotenv==1.0.0
+
+# JSON and data handling
+jsonschema==4.19.0
+
+# Optional: for parsing if needed later
+python-docx==0.8.11
