@@ -71,70 +71,73 @@
 ---
 
 ## 6. Recommended Tech Stack
-### Simplest Path (Recommended):
-- **Frontend:** React + Vite (or vanilla JS + Tailwind)
-- **Backend:** Node.js + Express (lightweight, easy to deploy)
-- **LLM:** OpenAI API (GPT-4o mini for cost efficiency)
-- **Deployment:** Vercel (both frontend and backend Node.js)
+### Chosen Stack (Free, Python, Beginner-Friendly):\n- **Frontend:** Streamlit (UI + web app all-in-one)
+- **Backend:** Python with Streamlit (no separate backend needed)
+- **LLM:** HuggingFace Transformers + Mistral 7B (free, open-source, no API key)
+- **Deployment:** Streamlit Cloud (free tier)
 - **Version Control:** GitHub
-- **Environment:** Windows/WSL2 + Git + VS Code
+- **Environment:** Windows/WSL2 + Git + VS Code + Python 3.9+
 
-### Alternative (If you prefer Python):
-- **Frontend:** Streamlit (easiest for quick prototypes)
-- **Backend:** FastAPI or Flask
-- **Deployment:** Streamlit Cloud (free) or Render.com
-- **LLM:** OpenAI API
-
-**Recommendation:** Go with **Streamlit** for MVP—faster to build, easier to iterate, one-click deployment to Streamlit Cloud.
+**Why this stack:**
+- ✓ 100% free (no OpenAI costs)
+- ✓ Python only—no JavaScript, Node.js, or DevOps
+- ✓ Streamlit handles UI, routing, and deployment
+- ✓ Models cached on first run, then instant
+- ✓ One-click deploy to Streamlit Cloud
+- ✓ Perfect for 1-week MVP timeline
 
 ---
 
 ## 7. Hosting/Deployment Plan
-### Option A: Streamlit Cloud (Easiest)
-1. Create `app.py` with Streamlit UI
+### Streamlit Cloud (Only Option Needed)
+1. Create `app.py` with Streamlit code
 2. Push to GitHub
-3. Link repo to Streamlit Cloud
-4. Public URL instant ✓
-5. Re-deploys on every git push
+3. Go to Streamlit Cloud, link your GitHub repo
+4. Public URL auto-deployed in ~2 minutes ✓
+5. Auto-re-deploys on every git push
 
-### Option B: Vercel (Frontend + Node.js Backend)
-1. Frontend: React app on Vercel
-2. Backend: Node.js API on Vercel serverless functions
-3. Connect via API calls
-4. More control, slightly more setup
+**That's it.** No Docker, no environment setup, no DevOps. Streamlit Cloud runs Python + loads HuggingFace models for free.
 
-**For this MVP, recommend Option A (Streamlit).** You'll have a deployed working demo in 1-2 hours.
+**Model Caching:**
+- First deployment: 2-3 mins (downloads Mistral 7B ~4GB)
+- Subsequent runs: <1 second (cached)
+- Only runs at deploy time, not per-request
 
 ---
 
 ## 8. System Prompt Design
-The system prompt is where "policy parsing magic" happens. Structure it like this:
+The system prompt is where "policy parsing magic" happens. For Mistral 7B (smaller model), be **extra explicit** and use simpler language:
 
 ```
-You are an expert educational data analyst assistant. 
-Your job is to interpret charter school policy and funding rule changes.
+You are a charter school data analyst assistant.
+Your job: Parse school policy changes and explain them clearly.
 
-When given a policy or rule update, you MUST:
-1. Identify what changed (old rule vs. new rule)
-2. Extract affected data elements (grade levels, student demographics, funding metrics)
-3. Describe the business logic impact (which dashboards/reports are affected)
-4. Suggest SQL or pseudocode changes
-5. Flag any ambiguities that need human clarification
+When given a policy update:
+1. Say what changed
+2. List affected grade levels (K, 1-2, 3-5, 6-8, 9-12)
+3. List affected metrics (proficiency, attendance, funding, graduation)
+4. Explain the impact in simple terms
+5. Suggest how to update a SQL query or dashboard
+6. Flag any confusing parts
 
-Format output as structured JSON with these fields:
+Output format (MUST be valid JSON):
 {
-  "rule_name": "...",
-  "affected_grade_levels": [...],
-  "affected_metrics": [...],
-  "business_logic_summary": "...",
-  "suggested_sql_pseudocode": "...",
-  "ambiguities_needing_clarification": [...],
-  "confidence_score": 0-1,
-  "human_review_required": true/false
+  "rule_summary": "Short description of what changed",
+  "grade_levels": [list of affected grades],
+  "metrics": [list of affected data columns],
+  "impact_explanation": "Explain in 1-2 sentences",
+  "suggested_update": "SQL or pseudocode idea",
+  "ambiguities": [list of unclear parts],
+  "confidence": "high/medium/low"
 }
 
-ALWAYS include a warning: "This is AI-generated guidance. A human data analyst MUST review and validate before deploying."
+WARNING: This is AI-generated guidance. A human MUST review before using.
 ```
+
+**Note:** Mistral 7B is smaller than GPT-4, so:
+- Simpler prompts work better
+- Examples are more important
+- Longer outputs are slower (but free!)
 
 ---
 
@@ -192,8 +195,18 @@ ALWAYS include a warning: "This is AI-generated guidance. A human data analyst M
 ```
 1. Create GitHub repo: policy-rule-interpreter
 2. Initialize Streamlit app structure
-3. Create .env file for OpenAI API key
-4. Set up requirements.txt
+3. Create .gitignore, requirements.txt, README.md
+4. Set up local Python virtual environment (venv)
+5. Install dependencies: streamlit, torch, transformers, huggingface_hub
+6. Test local Streamlit run
+```
+
+**requirements.txt:**
+```
+streamlit==1.28.0
+torch==2.0.0
+transformers==4.35.0
+huggingface_hub==0.17.0
 ```
 
 ### Phase 2: Frontend (45 mins)
@@ -207,11 +220,12 @@ ALWAYS include a warning: "This is AI-generated guidance. A human data analyst M
 
 ### Phase 3: LLM Integration (1 hour)
 ```
-1. Create openai_client.py module
-2. Load system prompt from file (docs/system_prompt.md)
-3. Send user input + system prompt to GPT-4o mini
-4. Parse JSON response
-5. Display formatted output
+1. Create llm_client.py module with HuggingFace Transformers
+2. Load Mistral 7B model via HuggingFace (auto-downloaded on first run)
+3. Load system prompt from file (docs/system_prompt.md)
+4. Create prompt template: system + policy text
+5. Run inference and parse JSON response
+6. Display formatted output in Streamlit
 ```
 
 ### Phase 4: Grounding + Examples (45 mins)
@@ -290,24 +304,23 @@ Create `EVALUATION.md` with a test table:
 ## 14. Risks and Limitations
 
 ### Risks:
-- **LLM hallucination:** AI invents metrics or rules not in policy
-  - Mitigation: Always show confidence score + require human review
+- **Model quality:** Mistral 7B is smaller than GPT-4, may hallucinate or miss details
+  - Mitigation: Extra grounding examples, simpler prompts, confidence scores
   
-- **Policy ambiguity:** Poorly written rules confuse the AI
-  - Mitigation: Flag ambiguities; suggest clarifying questions
+- **Slow inference:** First deployment ~2-3 min, but cached after
+  - Mitigation: Document in README; test locally first
   
-- **Cost overruns:** OpenAI API calls add up
-  - Mitigation: Use GPT-4o mini, monitor token usage, set budget limits
-  
-- **Deployment issues:** Streamlit or API goes down
-  - Mitigation: Document local setup in README; include example outputs
+- **Memory limits:** Streamlit Cloud has 1GB RAM limit (tight, but OK for MVP)
+  - Mitigation: Use model caching; may need to optimize if slow
 
 ### Limitations (Document Clearly):
 - This is a **prototype, not production-ready**
 - **Human review is mandatory**—AI output is guidance only
 - Handles text policies; complex PDFs require manual text extraction
 - Works best for English-language policies
+- Mistral 7B will miss some nuances that GPT-4 catches (acceptable for MVP)
 - May not handle edge cases or novel rule types
+- **No API costs, but slower inference than OpenAI (trade-off for free)**
 
 ---
 
@@ -430,9 +443,9 @@ Lesson: Honesty from AI > False confidence
 
 ## 17. Questions I Need to Answer Before Coding
 
-1. **OpenAI API Key Setup:**
-   - Do you have an OpenAI account + API key?
-   - Budget for this project? (estimate: $5-10 for MVP testing)
+1. **Python Environment:**
+   - Python 3.9+ installed? Confirmed?
+   - Any existing virtual environment for this course?
 
 2. **Real Example Policies:**
    - Can you provide 2-3 real (or anonymized) policy changes you've dealt with?
@@ -442,17 +455,17 @@ Lesson: Honesty from AI > False confidence
    - What tool/language is your dashboard built in? (SQL? Power BI? Tableau? Custom?)
    - Does this affect the "suggested code" format? (SQL vs. pseudocode vs. DAX vs. ...)
 
-4. **Deployment Preference:**
-   - Streamlit Cloud (instant, free, simplest)?
-   - Or do you prefer traditional Node.js + React on Vercel?
+4. **Model Performance Expectations:**
+   - Is "good enough" (Mistral 7B accuracy) acceptable?
+   - Or do you need higher accuracy (willing to add complexity)?
 
 5. **Evaluation Threshold:**
-   - What counts as "success"? 80% accuracy? 90%?
+   - What counts as "success"? 60%? 70%? 80% accuracy?
    - Or is it more qualitative: "Would a data analyst find this useful?"
 
-6. **Local Development:**
-   - Windows + WSL2 + Git + VS Code? Confirmed setup?
-   - Any existing Python environment for this course?
+6. **GitHub Account:**
+   - GitHub account ready? Know how to push/commit?
+   - Or should I walk through git setup?
 
 ---
 
