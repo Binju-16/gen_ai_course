@@ -128,7 +128,7 @@ with tab2:
             st.text(content)
             if st.button(f"Copy to Analyzer", key=filepath):
                 st.session_state["policy_text"] = content
-                st.experimental_rerun()
+                st.rerun()
 
 with tab3:
     st.header("System Prompt")
