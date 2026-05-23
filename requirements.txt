@@ -3,6 +3,7 @@ streamlit==1.28.0
 
 # LLM and API
 openai>=1.0.0
+httpx==0.27.2
 
 # Utilities
 python-dotenv==1.0.0
