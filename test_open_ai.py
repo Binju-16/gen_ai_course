@@ -1,8 +1,13 @@
+import os
+from dotenv import load_dotenv
 import openai
 
-# Set your OpenAI API key
-openai.api_key = "SECRET KEY REMOVED FOR COMMIT AND PUSH TO GITHUB"
-# Make a request to the OpenAI API
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+if not openai.api_key:
+    raise ValueError("OPENAI_API_KEY not set. Add it to .env")
+
 response = openai.ChatCompletion.create(
     model="gpt-4o",
     messages=[
@@ -11,5 +16,4 @@ response = openai.ChatCompletion.create(
     ]
 )
 
-# Print the response
 print(response["choices"][0]["message"]["content"])

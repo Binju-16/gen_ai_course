@@ -37,7 +37,7 @@ with tab1:
             value=st.session_state["policy_text"],
             height=300,
             placeholder="Paste policy text here...",
-            help="You can paste text from Word docs, emails, or any policy document.",
+            help="You can paste policy text from documents, emails, or any policy document.",
         )
 
         analyze_button = st.button(
@@ -128,7 +128,6 @@ with tab2:
             st.text(content)
             if st.button(f"Copy to Analyzer", key=filepath):
                 st.session_state["policy_text"] = content
-                st.success(f"Copied {title} to analyzer!")
                 st.experimental_rerun()
 
 with tab3:

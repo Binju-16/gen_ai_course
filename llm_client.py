@@ -55,9 +55,10 @@ Always output valid JSON with the following fields:
             max_tokens=1000,
         )
 
-        text = getattr(response.choices[0].message, "content", None)
+        choice = response.choices[0]
+        text = getattr(choice.message, "content", None)
         if text is None:
-            text = response.choices[0].message["content"]
+            text = choice["message"]["content"]
 
         try:
             return json.loads(text)
