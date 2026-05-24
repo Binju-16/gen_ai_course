@@ -458,3 +458,9 @@
 **Lines of Documentation:** ~800+
 **Time Invested:** 5 hours
 **Remaining:** 2 hours (testing) + 2 hours (deployment + submission)
+
+---
+
+## Phase 2: Real Prompt Iteration (May 24, 2026)
+
+Executed the first real prompt iteration for Phase 2. Created `docs/system_prompt_v1.md` as the V1 baseline, then updated the active prompt to V2 with stronger JSON enforcement and clearer ambiguity handling. This moved the plan from "planned iteration" to "actual iteration executed." Next step: compare real model outputs and record results in `EVALUATION.md`.

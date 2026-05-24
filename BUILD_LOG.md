@@ -536,3 +536,11 @@ If the policy mentions something NOT in this list, flag it in 'ambiguities'"
 **Last Updated:** May 16, 2026 (19:30 UTC)  
 **Next Update:** Tomorrow after local testing  
 **Version:** 1.0 (MVP)
+
+## 2026-05-24: Prompt iteration executed
+
+- Baseline prompt snapshot created as `docs/system_prompt_v1.md`
+- Updated active system prompt to V2 in `docs/system_prompt.md`
+- Improvements: strict JSON-only output, explicit uncertainty fallback, standardized metric names, stronger ambiguity guidance, always keep `human_review_required: true`
+- Execution: ran a representative policy example through both V1 and V2 and captured actual outputs
+- Outcome: V2 improved output consistency and safety by ensuring required keys and uncertainty behavior

@@ -1,0 +1,10 @@
+{
+  "rule_summary": "Starting in the 2024-2025 school year, funding calculations will vary by student grade level, with specific performance bonuses for certain grades based on proficiency or graduation rates.",
+  "grade_levels": ["K-2", "3-5", "6-8", "9-12"],
+  "affected_metrics": ["per_pupil_funding", "performance_bonus", "proficiency_rate", "graduation_rate"],
+  "business_logic_summary": "The dashboard will need to implement new calculations for funding based on grade levels and performance metrics, requiring separate tracking of proficiency and graduation rates.",
+  "suggested_sql_update": "CREATE TABLE funding_calculations AS SELECT student_id, grade_level, per_pupil_funding, CASE WHEN grade_level = '3-5' AND proficiency_rate >= 70 THEN per_pupil_funding * 1.1 WHEN grade_level = '6-8' AND proficiency_rate >= 75 THEN per_pupil_funding * 1.15 WHEN grade_level = '9-12' AND graduation_rate >= 85 THEN per_pupil_funding * 1.2 ELSE per_pupil_funding END AS total_funding FROM students;",
+  "ambiguities": ["Does this apply retroactively to 2023-24 data?", "How are students counted who move grades mid-year?"],
+  "confidence": "medium",
+  "human_review_required": true
+}

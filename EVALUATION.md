@@ -205,6 +205,63 @@ streamlit run app.py
 
 ---
 
+## Prompt Iteration Evaluation
+
+### Example policy case: policy_1_grade_levels.txt
+
+- Input: `data/example_policies/policy_1_grade_levels.txt`
+- Baseline prompt: `docs/system_prompt_v1.md`
+- Improved prompt: `docs/system_prompt.md` (V2)
+- Expected behavior:
+  - valid JSON only
+  - all required keys present
+  - standardized metric names
+  - ambiguity list included when needed
+  - `human_review_required: true`
+
+#### V1 actual output
+
+```json
+{
+  "rule_summary": "Starting in the 2024-2025 school year, funding calculations will vary by grade level, with specific performance bonuses for certain grades based on proficiency and graduation rates.",
+  "grade_levels": ["K-2", "3-5", "6-8", "9-12"],
+  "affected_metrics": [
+    "per_pupil_funding",
+    "proficiency_rate",
+    "graduation_rate"
+  ],
+  "business_logic_summary": "The dashboard will need to implement new logic to calculate funding based on grade-specific performance metrics and apply bonuses accordingly, while also tracking graduation rates for high school students.",
+  "suggested_sql_update": "UPDATE funding SET amount = CASE WHEN grade_level = 'K-2' THEN base_funding WHEN grade_level = '3-5' AND proficiency_rate >= 70 THEN base_funding * 1.10 WHEN grade_level = '6-8' AND proficiency_rate >= 75 THEN base_funding * 1.15 WHEN grade_level = '9-12' AND graduation_rate >= 85 THEN base_funding * 1.20 ELSE base_funding END;",
+  "ambiguities": [
+    "Does this apply retroactively to 2023-24 data?",
+    "How are students counted who move grades mid-year?"
+  ],
+  "confidence": "low",
+  "human_review_required": true
+}
+```
+
+#### V2 actual output
+- [paste actual V2 JSON output here]
+
+#### Pass/Fail assessment
+- `rule_summary`: 
+- `grade_levels`: 
+- `affected_metrics`: 
+- `business_logic_summary`: 
+- `suggested_sql_update`: 
+- `ambiguities`: 
+- `confidence`: 
+- `human_review_required`: 
+
+#### Observations
+- What improved:
+  - 
+- What still failed:
+  -
+
+---
+
 **Last Updated:** May 16, 2026  
 **Evaluator:** Binju Karki  
 **Next Review:** After first GitHub commit
